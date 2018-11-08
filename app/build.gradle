@@ -61,6 +61,9 @@ dependencies {
   implementation applicationDependencies.kotlin
   implementation applicationDependencies.appCompat
   implementation applicationDependencies.constraintLayout
+  implementation applicationDependencies.timber
+  implementation 'com.google.code.gson:gson:2.8.5'
+
 
   testImplementation unitTestDependencies.junit
   androidTestImplementation acceptanceTestDependencies.testRunner

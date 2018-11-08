@@ -1,4 +1,6 @@
 package ir.zinutech.android.theoplayersample.core.platform
 
-class BaseActivity {
+import androidx.appcompat.app.AppCompatActivity
+
+open class BaseActivity: AppCompatActivity() {
 }
