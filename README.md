@@ -20,7 +20,16 @@ Once you obtained the license, you need copy it into the ``` app/libs ``` folder
 
 ### Link your SDK file in ```build.gradle```
 
-In the module-level ```build.gradle``` file (```app/build.gradle```) use the proper name of your SDK file
+First of all you have to add the following code snippet above the dependencies{} inside ```app/build.gradle```:
+```
+repositories {
+  flatDir {
+    dirs 'libs'
+  }
+}
+```
+
+Then in the module-level ```build.gradle``` file (```app/build.gradle```) use the proper name of your SDK file
 
 ```
 dependencies {
@@ -77,7 +86,7 @@ dependencies {
 }
 ```
 
-## Important note
+### Important note
 
 Besides of adding the player @aar dependency to your build.gradle file, You also need to add Gson dependency as well, otherwise app will crash. 
 You can add the Gson dependency using the line below:
@@ -87,6 +96,12 @@ You can add the Gson dependency using the line below:
 implementation 'com.google.code.gson:gson:2.8.5'
 
 ```
+
+### Editing sample urls
+
+Samples to play are residing at **media_list.json** inside **Assets** folder. In order to add a new url to be played you have to add a new row under the proper category name inside **sample[]** array. each record must have a **name** and a **uri** field otherwise app might crash.
+
+**Note:** :rotating_light::rotating_light::rotating_light: If your sample url in **uri** field does not end with .m3u8 or .mpd app might not be able to guess SourceType needed by THEOPlayer, If this is the case you should help the app by adding **stream_type** field which should be filled with *m3u8* or *mpd* or *mp4*.
 
 
 
