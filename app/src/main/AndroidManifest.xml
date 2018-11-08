@@ -24,7 +24,7 @@
 
     <activity
         android:name=".features.PlayerActivity"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+        android:theme="@style/AppTheme.Transparent"
     />
   </application>
 

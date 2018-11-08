@@ -4,6 +4,10 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+androidExtensions {
+  experimental = true
+}
+
 android {
   compileSdkVersion deps.build.compileSdkVersion
   defaultConfig {
@@ -13,6 +17,8 @@ android {
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner deps.build.testInstrumentationRunner
+    vectorDrawables.useSupportLibrary = true
+
   }
   buildTypes {
     release {

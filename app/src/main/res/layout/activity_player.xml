@@ -5,7 +5,6 @@
     android:orientation="vertical"
     >
 
-
   <com.theoplayer.android.api.THEOplayerView
       android:id="@+id/player_activity_theoplayer"
       android:layout_width="match_parent"
