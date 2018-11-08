@@ -12,11 +12,14 @@ import kotlinx.android.synthetic.main.activity_samples_list.main_activity_view_p
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SampleListActivity : AppCompatActivity() {
+
+  private var samplesLoadJob: Job? = null
 
   private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
     Toast.makeText(this@SampleListActivity, throwable.message, Toast.LENGTH_LONG).show()
@@ -27,7 +30,7 @@ class SampleListActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(layout.activity_samples_list)
 
-    GlobalScope.launch(Dispatchers.Main + exceptionHandler) {
+    samplesLoadJob = GlobalScope.launch(Dispatchers.Main + exceptionHandler) {
 
 
       val samplesInputStream = assets.open(Constants.SAMPLES_FILE_NAME)
@@ -44,5 +47,10 @@ class SampleListActivity : AppCompatActivity() {
 
     }
 
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    samplesLoadJob?.cancel()
   }
 }
