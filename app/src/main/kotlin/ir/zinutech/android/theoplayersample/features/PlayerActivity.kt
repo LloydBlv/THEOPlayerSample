@@ -65,8 +65,8 @@ class PlayerActivity : BaseActivity() {
       title = playbackSrc.title
       setDisplayHomeAsUpEnabled(true)
       setHomeButtonEnabled(true)
-      setBackgroundDrawable(
-          ColorDrawable(ContextCompat.getColor(this@PlayerActivity, color.translucent)))
+//      setBackgroundDrawable(
+//          ColorDrawable(ContextCompat.getColor(this@PlayerActivity, color.translucent)))
     }
 
 
@@ -92,7 +92,7 @@ class PlayerActivity : BaseActivity() {
   }
 
   private fun initPlayer() {
-    Timber.d("initPlayer()")
+    Timber.d("initPlayer(), playbackSource:[%s]", playbackSrc)
 
     val typedSource: TypedSource = TypedSource.Builder
         .typedSource()
@@ -103,24 +103,31 @@ class PlayerActivity : BaseActivity() {
     val sourceDescription = SourceDescription.Builder()
         .sources(typedSource)
         .apply {
+          playbackSrc.poster?.let {
+            poster(it)
+          }
           playbackSrc.adUrl?.let {
-            THEOplayerAdDescription.Builder.adDescription(it)
+            ads(THEOplayerAdDescription.Builder.adDescription(it)
                 .apply {
                   playbackSrc.adSkipOffset?.let {
                     skipOffset(it)
                   }
+
+                  playbackSrc.adTimeOffset?.let {
+                    timeOffset(it)
+                  }
                 }
-                .build()
+                .build())
           }
         }
         .build()
 
     player_activity_theoplayer.player.apply {
       source = sourceDescription
-      isAutoplay = true
+      isAutoplay = playbackSrc.poster?.isNotEmpty() != true
       addEventListener(PlayerEventTypes.PLAY, playEventListener)
       addEventListener(PlayerEventTypes.PAUSE, pauseEventListener)
-//            addEventListener(PlayerEventTypes.TIMEUPDATE, timeUpdateEventListener)
+      addEventListener(PlayerEventTypes.TIMEUPDATE, timeUpdateEventListener)
     }
 
   }

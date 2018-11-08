@@ -10,12 +10,14 @@ data class PlaybackSource(
     val sourceType: SourceType,
     val poster: String? = null,
     val adUrl: String? = null,
-    val adSkipOffset: String? = null
+    val adSkipOffset: String? = null,
+    val adTimeOffset: String? = null
 ) : Parcelable {
   constructor(source: Parcel) : this(
       source.readString(),
       source.readString(),
       SourceType.values()[source.readInt()],
+      source.readString(),
       source.readString(),
       source.readString(),
       source.readString()
@@ -30,6 +32,7 @@ data class PlaybackSource(
     writeString(poster)
     writeString(adUrl)
     writeString(adSkipOffset)
+    writeString(adTimeOffset)
   }
 
   companion object {

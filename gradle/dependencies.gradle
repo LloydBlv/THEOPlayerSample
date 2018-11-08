@@ -1,68 +1,64 @@
-def versions = [
-        kotlin_version          : '1.3.0',
-        appCompat_version       : '1.0.0',
-        constraintLayout_version: '2.0.0-alpha2',
-        glide_version           : '4.8.0',
+def versions = [kotlin_version           : '1.3.0',
+                appCompat_version        : '1.0.0',
+                material_version         : '1.0.0',
+                constraintLayout_version : '2.0.0-alpha2',
+                glide_version            : '4.8.0',
 
-        //Third party libraries,
-        timber_version          : '4.7.1',
+                //Third party libraries,
+                timber_version           : '4.7.1',
+                gson_version             : '2.8.5',
+                kotlin_coroutines_version: '1.0.0',
 
-        //Unit Testing,
-        junit_version           : '4.12',
-        mockito_version         : '2.0.0',
-        kluent_version          : '1.15',
 
-        //Acceptance Testing,
-        runner_version          : '1.1.0',
-        espresso_version        : '3.1.0'
-]
+                //Unit Testing,
+                junit_version            : '4.12',
+                mockito_version          : '2.0.0',
+                kluent_version           : '1.15',
 
-def build = [
-        buildToolsVersion        : '28.0.3',
-        compileSdkVersion        : 28,
-        minSdkVersion            : 16,
-        targetSdkVersion         : 28,
-        javaVersion              : JavaVersion.VERSION_1_8,
-        testInstrumentationRunner: "androidx.test.runner.AndroidJUnitRunner",
+                //Acceptance Testing,
+                runner_version           : '1.1.0',
+                espresso_version         : '3.1.0']
 
-        gradlePlugins            : [
-                android: 'com.android.tools.build:gradle:3.2.1',
-                kotlin : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin_version}"
-        ]
-]
+def build = [buildToolsVersion        : '28.0.3',
+             compileSdkVersion        : 28,
+             minSdkVersion            : 16,
+             targetSdkVersion         : 28,
+             javaVersion              : JavaVersion.VERSION_1_8,
+             testInstrumentationRunner: "androidx.test.runner.AndroidJUnitRunner",
+
+             gradlePlugins            : [android: 'com.android.tools.build:gradle:3.2.1',
+                                         kotlin : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin_version}"]]
 
 
 
 
-def mainApplication = [
-        kotlin                  : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin_version}",
-        appCompat               : "androidx.appcompat:appcompat:${versions.appCompat_version}",
-        recyclerView            : "androidx.recyclerview:recyclerview:${versions.appCompat_version}",
-        constraintLayout        : "androidx.constraintlayout:constraintlayout:${versions.constraintLayout_version}",
-        glide                   : "com.github.bumptech.glide:glide:${versions.glide_version}",
-        glideCompiler           : "com.github.bumptech.glide:compiler:${versions.glide_version}",
-        okhttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:${versions.okhttp_logging_interceptor_version}",
-        timber                  : "com.jakewharton.timber:timber:${versions.timber_version}"
-
-]
-
-def unitTesting = [
-        kotlin : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin_version}",
-        junit  : "junit:junit:${versions.junit_version}",
-        mockito: "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockito_version}",
-        kluent : "org.amshove.kluent:kluent:${versions.kluent_version}"
+def mainApplication = [kotlin                  : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin_version}",
+                       kotlinCoroutines        : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.kotlin_coroutines_version}",
+                       kotlinCoroutinesAndroid : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.kotlin_coroutines_version}",
+                       appCompat               : "androidx.appcompat:appcompat:${versions.appCompat_version}",
+                       material                : "com.google.android.material:material:${versions.material_version}",
+                       recyclerView            : "androidx.recyclerview:recyclerview:${versions.appCompat_version}",
+                       constraintLayout        : "androidx.constraintlayout:constraintlayout:${versions.constraintLayout_version}",
+                       glide                   : "com.github.bumptech.glide:glide:${versions.glide_version}",
+                       glideCompiler           : "com.github.bumptech.glide:compiler:${versions.glide_version}",
+                       okhttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:${versions.okhttp_logging_interceptor_version}",
+                       timber                  : "com.jakewharton.timber:timber:${versions.timber_version}",
+                       gson                    : "com.google.code.gson:gson:${versions.gson_version}"
 
 ]
 
-def acceptanceTesting = [
-        testRunner  : "androidx.test:runner:${versions.runner_version}",
-        espressoCore: "androidx.test.espresso:espresso-core:${versions.espresso_version}",
+def unitTesting = [kotlin : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin_version}",
+                   junit  : "junit:junit:${versions.junit_version}",
+                   mockito: "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockito_version}",
+                   kluent : "org.amshove.kluent:kluent:${versions.kluent_version}"
+
 ]
 
-ext.deps = [
-        "mainApplication"  : mainApplication,
-        "unitTesting"      : unitTesting,
-        "build"            : build,
-        "acceptanceTesting": acceptanceTesting,
-        "versions"         : versions
-]
+def acceptanceTesting = [testRunner  : "androidx.test:runner:${versions.runner_version}",
+                         espressoCore: "androidx.test.espresso:espresso-core:${versions.espresso_version}",]
+
+ext.deps = ["mainApplication"  : mainApplication,
+            "unitTesting"      : unitTesting,
+            "build"            : build,
+            "acceptanceTesting": acceptanceTesting,
+            "versions"         : versions]
