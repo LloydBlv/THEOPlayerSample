@@ -65,8 +65,6 @@ class PlayerActivity : BaseActivity() {
       title = playbackSrc.title
       setDisplayHomeAsUpEnabled(true)
       setHomeButtonEnabled(true)
-//      setBackgroundDrawable(
-//          ColorDrawable(ContextCompat.getColor(this@PlayerActivity, color.translucent)))
     }
 
 

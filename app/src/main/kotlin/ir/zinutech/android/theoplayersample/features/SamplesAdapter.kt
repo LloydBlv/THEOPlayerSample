@@ -19,8 +19,6 @@ class SamplesAdapter(val data: List<PlaybackSource>, val onItemClickListener: (V
       }
   )
 
-  fun getItem(position: Int): PlaybackSource = data[position]
-
   override fun getItemCount(): Int = data.size
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {

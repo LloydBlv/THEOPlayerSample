@@ -63,6 +63,7 @@ object XmlParser {
         "stream_type" -> {
           streamType = jsonReader.nextString()
         }
+        else -> throw ParserException("Unsupported name: $name")
       }
     }
 
